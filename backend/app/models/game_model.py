@@ -1,10 +1,11 @@
 from sqlalchemy import Column, ForeignKey, Integer, DateTime
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
-from database import Base
+from db import Base
 
 
-class Game(Base):
+class GameModel(Base):
     __tablename__ = 'games'
 
     id = Column(Integer, primary_key=True, index=True)
@@ -12,10 +13,8 @@ class Game(Base):
     creator_id = Column(Integer, ForeignKey('users.id'))
     opponent_id = Column(Integer, ForeignKey('users.id'))
 
-    creator = relationship('User', back_populates='created_games')
-    opponent = relationship('User', back_populates='joined_games')
+    creator = relationship('UserModel', foreign_keys=[creator_id])
+    opponent = relationship('UserModel', foreign_keys=[opponent_id])
 
-    turns = relationship('GameTurns', back_populates='game')
-
-    started_at = Column(DateTime)
+    started_at = Column(DateTime, default=datetime.utcnow)
     finished_at = Column(DateTime)
