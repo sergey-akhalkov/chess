@@ -2,7 +2,7 @@ from sqlalchemy import Column, ForeignKey, Integer, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
-from db import Base
+from app.database import Base
 
 
 class GameModel(Base):

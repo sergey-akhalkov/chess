@@ -21,3 +21,8 @@ async def create_game() -> int:
 @router.post("/games/{game_id}/turns")
 async def make_turn(game_id: int, from_cell: str, to_cell: str) -> dict:
     return dict()
+
+
+@router.get("/users/{user_id}/games")
+async def get_user_games(user_id: int, skip: int = 0, limit: int = 10) -> list:
+    return []
